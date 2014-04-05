@@ -1,0 +1,65 @@
+
+public class test {
+	public static void main(String[] args) {
+		int rows;
+		int columns;
+		SeatChart sc = new SeatChart();
+		Scanner input = new Scanner(System.in);
+		int[][] seatChart = { { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 },
+				{ 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 },
+				{ 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 },
+				{ 10, 10, 20, 20, 20, 20, 20, 20, 10, 10 },
+				{ 10, 10, 20, 20, 20, 20, 20, 20, 10, 10 },
+				{ 10, 10, 20, 20, 20, 20, 20, 20, 10, 10 },
+				{ 20, 20, 30, 30, 40, 40, 30, 30, 20, 20 },
+				{ 20, 30, 30, 40, 50, 50, 40, 30, 30, 20 },
+				{ 30, 40, 50, 50, 50, 50, 50, 50, 40, 30 } };
+
+		rows = seatChart.length;
+		columns = seatChart[0].length;
+		boolean run = true;
+
+		sc.auto_populate(seatChart);
+		int r = -1;
+		int c = -1;
+		while (run == true) {
+			System.out.println("Here is your seat chart");
+			sc.printArr();
+			System.out
+					.println("Enter 1 for choosing seat, "
+							+ "\n and 2 for choosing price");
+			int chooseMethod = input.nextInt();
+			if (chooseMethod == 1) {
+				System.out
+						.println("Enter the row of the seat you want from 0 - "
+								+ (rows - 1) + ".");
+				r = input.nextInt();
+				System.out
+						.println("Enter the column of the seat"
+								+ " you want from 0 - "
+								+ (columns - 1));
+				c = input.nextInt();
+				if (r >= rows || c >= columns) {
+					System.out.println("Input is out of bounds");
+					return;
+				}
+
+				sc.chooseSeatPosition(r, c);
+			} else if (chooseMethod == 2) {
+				System.out.println("Here is the seat chart");
+				sc.printArr();
+				System.out.println("Enter your desired price");
+				int price = input.nextInt();
+				System.out.println(sc.chooseRandomSeat(price));
+			} else {
+				System.out.println("Invalid selection.");
+			}
+			System.out.println("To quit program, enter 3. "
+					+ "To continue, enter any other number");
+			if (input.nextInt() == 3) {
+				System.out.println("You have exited.");
+				run = false;
+			}
+		}
+	}
+}
