@@ -1,0 +1,16 @@
+public class Seat {
+
+	int price;
+
+	Seat(int x) {
+		price = x;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	// if we ever need to change the price of a seat
+	public void setPrice(int a) {
+		price = a;
+
