@@ -1,0 +1,58 @@
+public class SeatChart {
+
+	int goOn = 1;
+	int seatRows = 0;
+	int seatAisles = 0;
+	Seat[][] allSeats;
+
+	public void auto_populate(int[][] arr) {
+		seatRows = arr.length;
+		seatAisles = arr[0].length;
+		allSeats = new Seat[seatRows][seatAisles];
+
+		int[][] seatChart = arr;
+		// Initializing allSeats
+		for (int i = 0; i < seatRows; i++) {
+			for (int j = 0; j < seatAisles; j++) {
+				allSeats[i][j] = new Seat(seatChart[i][j]);
+			}
+		}
+	}
+
+	public void chooseSeatPosition(int r, int c) {
+		if (allSeats[r][c].getPrice() == 0) {
+			System.out.println("This seat is already booked! Sorry.");
+		} else {
+			allSeats[r][c].setPrice(0);
+			System.out.println("You have successfully booked a seat!");
+			System.out.println("The seat you have booked is " + r + "," + c
+					+ ".");
+		}
+	}
+
+	public String chooseRandomSeat(int price) {
+		String response;
+		for (int i = 0; i < seatRows; i++) {
+			for (int j = 0; j < seatAisles; j++) {
+				if (allSeats[i][j].getPrice() == price) {
+					allSeats[i][j].setPrice(0);
+					response = "The seat you got is in row: " + i
+							+ " and in column: " + j;
+					return response;
+				}
+			}
+		}
+
+		response = "No seat found. Sorry bro";
+		return response;
+	}
+
+	public void printArr() {
+		for (int i = 0; i < seatRows; i++) {
+			for (int j = 0; j < seatAisles; j++) {
+				System.out.print(allSeats[i][j].getPrice() + "\t");
+			}
+			System.out.println();
+		}
+	}
+}
